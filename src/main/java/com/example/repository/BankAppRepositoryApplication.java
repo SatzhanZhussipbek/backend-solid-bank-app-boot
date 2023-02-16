@@ -37,8 +37,8 @@ public class BankAppRepositoryApplication implements CommandLineRunner {
         TransactionWithdrawCLI transactionWithdrawCLI = context.getBean(TransactionWithdrawCLI.class);
 
         String helpMessage = "1 - show accounts\n2 - create account\n3 - deposit\n4 - withdraw\n5 - transfer\n6 - this message\n7 - exit\n";
-        System.out.printf("Welcome to CLI bank service\n");
-        System.out.printf("Enter operation number: \n");
+        System.out.print("Welcome to CLI bank service\n");
+        System.out.print("Enter operation number: \n");
         System.out.printf(helpMessage);
         while (running) {
             switch (myCLI.getScanner().nextLine()) {
@@ -66,12 +66,12 @@ public class BankAppRepositoryApplication implements CommandLineRunner {
                     break;
 
                 case "7":
-                    System.out.printf("The Application is closed now\n");
+                    System.out.print("The Application is closed now\n");
                     running = false;
                     break;
 
                 default:
-                    System.out.printf("Command not recognized!\n");
+                    System.out.print("Command not recognized!\n");
                     break;
             }
         }
