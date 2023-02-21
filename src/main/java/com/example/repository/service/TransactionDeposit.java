@@ -1,8 +1,8 @@
-package com.example.repository.services;
+package com.example.repository.service;
 
-import com.example.repository.data.TransactionRepository;
-import com.example.repository.entity.Account;
-import com.example.repository.entity.Transaction;
+import com.example.repository.repository.TransactionRepository;
+import com.example.repository.model.Account;
+import com.example.repository.model.Transaction;
 import org.springframework.stereotype.Component;
 
 @Component

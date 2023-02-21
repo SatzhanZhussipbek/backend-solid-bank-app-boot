@@ -1,8 +1,8 @@
-package com.example.repository.services;
+package com.example.repository.service;
 
-import com.example.repository.data.AccountDAO;
-import com.example.repository.entity.Account;
-import com.example.repository.entity.AccountType;
+import com.example.repository.repository.AccountDAO;
+import com.example.repository.model.Account;
+import com.example.repository.model.AccountType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,12 +18,12 @@ public class AccountListingServiceImpl implements AccountListingService{
     }
 
     @Override
-    public Account getClientAccount(String clientID, String accountID) {
+    public Account getClientAccount(String clientID, long accountID) {
         return accountDAO.getAccountByClientIDAndAccountID(clientID, accountID);
     }
 
     @Override
-    public Account getAccountThatWithdraw(String clientID, String accountID) {
+    public Account getAccountThatWithdraw(String clientID, long accountID) {
         Account account = null;
         if (accountDAO.getAccountByClientIDAndAccountID(clientID, accountID) != null) {
             if (accountDAO.getAccountByClientIDAndAccountID(clientID, accountID).isWithdrawAllowed()) {

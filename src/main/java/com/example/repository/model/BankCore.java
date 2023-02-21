@@ -1,11 +1,15 @@
-package com.example.repository.data;
+package com.example.repository.model;
 
-import com.example.repository.entity.AccountType;
-import com.example.repository.services.AccountCreationService;
+import com.example.repository.model.AccountType;
+import com.example.repository.service.AccountCreationService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
+@Setter
 public class BankCore {
     private static long id = 1;
 
@@ -18,11 +22,12 @@ public class BankCore {
     }
 
     public void createNewAccount(AccountType accountType, String clientID) {
-        accountCreation.create(accountType, id, clientID, String.valueOf(lastAccountNumber));
+        accountCreation.create(accountType, id, clientID, lastAccountNumber);
         incrementLastAccountNumber();
     }
 
     private void incrementLastAccountNumber() {
         lastAccountNumber++;
     }
+
 }

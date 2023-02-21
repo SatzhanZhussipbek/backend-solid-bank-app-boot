@@ -1,4 +1,4 @@
-package com.example.repository.entity;
+package com.example.repository.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@org.springframework.data.relational.core.mapping.Table(name = "TRANSACTION")
+@Table(name = "TRANSACTION")
 @AllArgsConstructor
 @Getter
 @Setter
@@ -18,13 +18,13 @@ public class Transaction {
     @Column(name = "client_id")
     private String clientID;
     @Column(name = "acc_id")
-    private String accountID;
+    private long accountID;
     @Column(name = "account_type")
     private AccountType accountType;
     @Column(name = "amount")
     private double amount;
 
-    public Transaction(String clientID, String accountID, AccountType
+    public Transaction(String clientID, long accountID, AccountType
             accountType, double amount) {
         this.clientID = clientID;
         this.accountID = accountID;

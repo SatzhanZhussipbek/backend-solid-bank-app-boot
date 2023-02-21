@@ -1,8 +1,7 @@
-package com.example.repository.entity;
+package com.example.repository.model;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan
 public enum AccountType {
     CHECKING,
     SAVING,

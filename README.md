@@ -4,27 +4,29 @@
 <li>Go to the Terminal</li>
 <li>Use "cd" command to get the location of the project</li>
 <li>Write "javac -project_name.java"</li>
-<li>Write "java SolidBankAppWithConfig"</li>
+<li>Write "java -project_name"</li>
 <li>In the IDE you need to connect to H2 database</li>
 <li>Then you need to create tables "Account" and "Transaction"</li>
 <li>To create the tables use the .sql file in "resources/db/migration"</li>
 <li>Go to H2 console at the address: "//localhost:8080/h2-console"</li>
 <li>When you perform operations in IDE, you can see immediate results in H2 console</li>
+<li>In order to perform HTTP requests, you need to go to "//localhost:8080/swagger-ui/index.html#/"</li>
+<li>There you can execute requests or use Postman to do the same</li>
 
-<h3>Operations</h3>
+<h3>HTTP Requests</h3>
 
 ```
-Number 1 -> show accounts
+GET request -> show all accounts
 
-Number 2 -> create an account
+POST request -> create an account
 
-Number 3 -> deposit
+PUT request -> deposit into an account
 
-Number 4 -> withdraw
+PUT request -> withdraw from an account
 
-Number 5 -> list of transactions
+GET request -> getting information about one particular account
 
-Number 6 -> this message
+GET request -> list of transactions of an account
 
-Number 7 -> exit
+DELETE request -> delete an account
 ``` 

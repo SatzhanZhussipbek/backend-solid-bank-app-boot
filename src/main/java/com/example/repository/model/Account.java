@@ -1,15 +1,17 @@
-package com.example.repository.entity;
+package com.example.repository.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 
 @Entity
-@org.springframework.data.relational.core.mapping.Table(name = "ACCOUNT")
+@AllArgsConstructor
+@Table(name = "ACCOUNT")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "account_id")
-    private String accountID;
+    private long accountID;
     @Column(name = "account_type")
     private AccountType accountType;
     @Column(name = "client_id")
@@ -19,25 +21,15 @@ public class Account {
     @Column(name = "withdraw_allowed")
     private boolean withdrawAllowed;
 
-    /*public Account(long accountID, AccountType accountType,
-                   String clientID, double balance,
-                   boolean withdrawAllowed) {
-        this.accountID = accountID;
-        this.accountType = accountType;
-        this.clientID = clientID;
-        this.balance = balance;
-        this.withdrawAllowed = withdrawAllowed;
-    }*/
-
     public Account() {
 
     }
 
-    public String getAccountID() {
+    public long getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(String accountID) {
+    public void setAccountID(long accountID) {
         this.accountID = accountID;
     }
 
@@ -75,7 +67,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return String.format("Account{id='%03d%06d', clientID='%s', balance='%.1f'}", 1, Long.parseLong(accountID), clientID, balance);
+        return String.format("Account{id='%03d%06d', clientID='%s', balance='%.1f'}", 1, accountID, clientID, balance);
     }
 
     public long getId() {

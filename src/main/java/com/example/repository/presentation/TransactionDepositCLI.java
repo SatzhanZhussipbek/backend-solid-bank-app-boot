@@ -1,8 +1,8 @@
 package com.example.repository.presentation;
 
-import com.example.repository.entity.Account;
-import com.example.repository.services.AccountListingService;
-import com.example.repository.services.TransactionDeposit;
+import com.example.repository.model.Account;
+import com.example.repository.service.AccountListingService;
+import com.example.repository.service.TransactionDeposit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class TransactionDepositCLI {
             System.out.println("The account ID is not valid.");
             return;
         }
-        Account clientAcc = accountListing.getClientAccount(ClientID, accountNumber);
+        Account clientAcc = accountListing.getClientAccount(ClientID, Long.parseLong(accountNumber));
         if (clientAcc == null) {
             System.out.println("The account doesn't exist.");
             return;

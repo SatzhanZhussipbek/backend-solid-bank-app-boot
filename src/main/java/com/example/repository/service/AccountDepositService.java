@@ -1,6 +1,6 @@
-package com.example.repository.services;
+package com.example.repository.service;
 
-import com.example.repository.entity.Account;
+import com.example.repository.model.Account;
 
 public interface AccountDepositService {
     public void deposit(double amount, Account account);

@@ -1,11 +1,10 @@
 package com.example.repository.presentation;
 
-import com.example.repository.entity.Account;
+import com.example.repository.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.example.repository.services.AccountWithdraw;
-import com.example.repository.services.TransactionWithdraw;
-import com.example.repository.services.AccountListingService;
+import com.example.repository.service.TransactionWithdraw;
+import com.example.repository.service.AccountListingService;
 
 @Component
 public class TransactionWithdrawCLI {
@@ -29,7 +28,7 @@ public class TransactionWithdrawCLI {
             System.out.println("The account ID is not valid.");
             return;
         }
-        Account accountWithdraw = accountListing.getAccountThatWithdraw(clientID, clientAccNum);
+        Account accountWithdraw = accountListing.getAccountThatWithdraw(clientID, Long.parseLong(clientAccNum));
         if (accountWithdraw == null) {
             System.out.println("The account doesn't exist.");
             return;
