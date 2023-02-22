@@ -1,20 +1,33 @@
 package com.example.repository.service;
 
+import com.example.repository.exceptions.AccountNotFoundException;
+import com.example.repository.model.Transaction;
 import com.example.repository.repository.AccountDAO;
 import com.example.repository.model.Account;
+import com.example.repository.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountWithdrawServiceImpl implements AccountWithdrawService{
     private AccountDAO accountDAO;
+
+    private TransactionRepository transactionRepository;
     @Autowired
-    public AccountWithdrawServiceImpl(AccountDAO accountDAO) {
+    public AccountWithdrawServiceImpl(AccountDAO accountDAO, TransactionRepository transactionRepository) {
         this.accountDAO = accountDAO;
+        this.transactionRepository = transactionRepository;
     }
     @Override
     public void withdraw(double amount, Account account) {
-        System.out.printf("%.2f$ transferred from %03d%06d account\n", amount, 1, account.getAccountID());
-        accountDAO.updateAccountSetBalance(account.getBalance()-amount, account.getAccountID());
+        if (accountDAO.getAccountByClientIDAndAccountID(account.getClientID(), account.getAccountID()) != null) {
+            accountDAO.updateAccountSetBalance(account.getBalance() - amount, account.getAccountID());
+            Transaction newTransaction = new Transaction(account.getClientID(),
+                    account.getAccountID(), account.getAccountType(), amount);
+            transactionRepository.save(newTransaction);
+        }
+        else {
+            throw new AccountNotFoundException(account.getAccountID());
+        }
     }
 }

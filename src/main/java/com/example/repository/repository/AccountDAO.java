@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AccountDAO extends CrudRepository<Account, String> {
+public interface AccountDAO extends CrudRepository<Account, Long> {
     @Transactional
     @Modifying
     @Query(value = "update Account a set a.balance=?1 where a.account_id=?2",

@@ -1,6 +1,6 @@
 package com.example.repository.presentation;
 
-import com.example.repository.model.BankCore;
+import com.example.repository.service.BankCore;
 import com.example.repository.model.Account;
 import com.example.repository.model.AccountType;
 import com.example.repository.service.AccountListingService;

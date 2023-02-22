@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.repository.exceptions.ErrorTemplate;
 import com.example.repository.presentation.AccountBasicCLI;
 import com.example.repository.presentation.MyCLI;
 import com.example.repository.presentation.TransactionDepositCLI;
@@ -13,6 +14,8 @@ import org.springframework.context.ApplicationContext;
 
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication

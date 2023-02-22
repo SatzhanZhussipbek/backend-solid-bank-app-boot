@@ -1,4 +1,4 @@
-package com.example.repository.model;
+package com.example.repository.service;
 
 import com.example.repository.model.AccountType;
 import com.example.repository.service.AccountCreationService;
