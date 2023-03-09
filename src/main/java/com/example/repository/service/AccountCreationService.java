@@ -4,7 +4,7 @@ import com.example.repository.model.AccountType;
 
 public interface AccountCreationService {
 
-    void create(AccountType accountType, long bankID, String clientID, long accountID);
+    void create(AccountType accountType, long bankID, long clientID, long accountID);
 
     void delete(long accountID);
 }

@@ -1,6 +1,6 @@
 package com.example.repository.repository;
 
-import com.example.repository.model.Transaction;
+import com.example.repository.entity.Transaction;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

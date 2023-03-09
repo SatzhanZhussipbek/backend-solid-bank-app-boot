@@ -2,8 +2,8 @@ package com.example.repository.service;
 
 import com.example.repository.exceptions.AccountNotFoundException;
 import com.example.repository.exceptions.AccountsNotFoundException;
-import com.example.repository.repository.AccountDAO;
-import com.example.repository.model.Account;
+import com.example.repository.repository.AccountRepository;
+import com.example.repository.entity.Account;
 import com.example.repository.model.AccountType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,26 +13,26 @@ import java.util.List;
 @Component
 public class AccountListingServiceImpl implements AccountListingService{
 
-    private AccountDAO accountDAO;
+    private AccountRepository accountRepository;
     @Autowired
-    public AccountListingServiceImpl(AccountDAO accountDAO) {
-        this.accountDAO = accountDAO;
+    public AccountListingServiceImpl(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     @Override
-    public Account getClientAccount(String clientID, long accountID) {
-        if (accountDAO.getAccountByClientIDAndAccountID(clientID, accountID) != null) {
-            return accountDAO.getAccountByClientIDAndAccountID(clientID, accountID);
+    public Account getClientAccount(long clientID, long accountID) {
+        if (accountRepository.getAccountByClientIDAndAccountID(clientID, accountID) != null) {
+            return accountRepository.getAccountByClientIDAndAccountID(clientID, accountID);
         }
         throw new AccountNotFoundException(accountID);
     }
 
     @Override
-    public Account getAccountThatWithdraw(String clientID, long accountID) {
+    public Account getAccountThatWithdraw(long clientID, long accountID) {
         Account account = null;
-        if (accountDAO.findById(accountID).isPresent()) {
-            if (accountDAO.getAccountByClientIDAndAccountID(clientID, accountID).isWithdrawAllowed()) {
-                account = accountDAO.getAccountByClientIDAndAccountID(clientID, accountID);
+        if (accountRepository.findById(accountID).isPresent()) {
+            if (accountRepository.getAccountByClientIDAndAccountID(clientID, accountID).isWithdrawAllowed()) {
+                account = accountRepository.getAccountByClientIDAndAccountID(clientID, accountID);
             } else {
                 System.out.println("You can't withdraw money from a fixed account.");
             }
@@ -42,16 +42,16 @@ public class AccountListingServiceImpl implements AccountListingService{
     }
 
     @Override
-    public List<Account> getAccountsByClientID(String clientID) {
-        if (!accountDAO.getAccountsByClientID(clientID).isEmpty()) {
-            List<Account> list = new ArrayList<>(accountDAO.getAccountsByClientID(clientID));
+    public List<Account> getAccountsByClientID(long clientID) {
+        //if (!accountRepository.getAccountsByClientID(clientID).isEmpty()) {
+            List<Account> list = new ArrayList<>(accountRepository.getAccountsByClientID(clientID));
             return list;
-        }
-        throw new AccountsNotFoundException(Long.parseLong(clientID));
+        //}
+        //throw new AccountsNotFoundException(Long.parseLong(clientID));
     }
 
     @Override
-    public List<Account> getAccountsByClientIDAndAccountType(String clientID, AccountType accountType) {
-        return accountDAO.getAccountsByClientIDAndAccountType(clientID, accountType);
+    public List<Account> getAccountsByClientIDAndAccountType(long clientID, AccountType accountType) {
+        return accountRepository.getAccountsByClientIDAndAccountType(clientID, accountType);
     }
 }

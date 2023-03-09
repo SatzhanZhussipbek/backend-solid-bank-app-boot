@@ -1,5 +1,6 @@
-package com.example.repository.model;
+package com.example.repository.entity;
 
+import com.example.repository.model.AccountType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +17,16 @@ public class Transaction {
     @Column(name = "transact_id")
     private long id;
     @Column(name = "client_id")
-    private String clientID;
+    private long clientID;
     @Column(name = "acc_id")
     private long accountID;
     @Column(name = "account_type")
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
     @Column(name = "amount")
     private double amount;
 
-    public Transaction(String clientID, long accountID, AccountType
+    public Transaction(long clientID, long accountID, AccountType
             accountType, double amount) {
         this.clientID = clientID;
         this.accountID = accountID;

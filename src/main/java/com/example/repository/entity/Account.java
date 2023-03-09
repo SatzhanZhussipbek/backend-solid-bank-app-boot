@@ -1,7 +1,9 @@
-package com.example.repository.model;
+package com.example.repository.entity;
+
+import com.example.repository.model.AccountType;
+import lombok.AllArgsConstructor;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 
 @Entity
 @AllArgsConstructor
@@ -13,9 +15,10 @@ public class Account {
     @Column(name = "account_id")
     private long accountID;
     @Column(name = "account_type")
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
     @Column(name = "client_id")
-    private String clientID;
+    private long clientID;
     @Column(name = "balance")
     private double balance;
     @Column(name = "withdraw_allowed")
@@ -41,11 +44,11 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public String getClientID() {
+    public long getClientID() {
         return clientID;
     }
 
-    public void setClientID(String clientID) {
+    public void setClientID(long clientID) {
         this.clientID = clientID;
     }
 
