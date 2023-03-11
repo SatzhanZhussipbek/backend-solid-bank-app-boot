@@ -5,8 +5,11 @@ import java.util.List;
 import com.example.repository.entity.Person;
 import com.example.repository.model.JwtRequest;
 import com.example.repository.model.TransferRequest;
+import com.example.repository.model.UserDAO;
 import com.example.repository.repository.AccountRepository;
 import com.example.repository.repository.PersonRepository;
+import com.example.repository.security.AccountUserDetails;
+import com.example.repository.security.AccountUserDetailsService;
 import com.example.repository.service.BankCore;
 import com.example.repository.repository.TransactionRepository;
 import com.example.repository.entity.Account;
@@ -24,7 +27,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -52,8 +57,16 @@ public class AccountController {
     @Autowired
     private PersonRepository personRepository;
 
-    // Получение списка всех счетов клиента ( + )
+    @GetMapping("/information")
+    public UserDAO getInfo(@RequestParam String username) {
+        Person person = personRepository.getPersonByClientName(username);
+        if (person == null) {
+            throw new UsernameNotFoundException("There is no user with such name.");
+        }
+        return new UserDAO(person.getClientID(), person.getClientName());
+    }
 
+    // Получение списка всех счетов клиента ( + )
     @GetMapping("/accounts")
     public ResponseEntity<Object> getAccounts(@RequestParam long clientID, Authentication authentication) {
         Person person = personRepository.getPersonByClientID(clientID);
